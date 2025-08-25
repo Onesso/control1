@@ -6,28 +6,46 @@
   height: 94vh;
   padding: 3vh;
   overflow: hidden;
+  background-color: #fff;
 
   .imageSection {
     grid-column: span 7 / span 7;
     grid-row: span 12 / span 12;
-    background-color: #0a66c2;
     border-radius: 10px;
     height: 100%;
     display: grid;
     place-items: center;
 
-    .spliter {
-      display: grid;
-      grid-template-rows: 40% 60%;
-      border: 1px solid black;
-      height: 80%;
-      width: 88%;
-
-      .messageSection {
-        background: #cc1919; // demo
+    ngb-carousel {
+      .picsum-img-wrapper {
+        img {
+          height: 90vh;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+        }
       }
-      .imageDiv {
-        background: #ddd; // demo
+      .carousel-caption {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h3 {
+          margin-top: 4rem;
+          font-size: 6rem;
+          color: #fff;
+          font-weight: 600;
+        }
+        p {
+          color: #fff;
+          font-weight: 600;
+        }
+      }
+      ::ng-deep .carousel-caption {
+        top: 0;
+        bottom: auto;
+        padding-top: 1rem;
+        text-align: center;
       }
     }
   }
@@ -42,7 +60,7 @@
     .formDiv {
       background-color: #fff;
       height: min-content;
-      min-width: 30rem;
+      min-width: 30vw;
       width: 70%;
       border-radius: 10px;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
@@ -50,7 +68,7 @@
 
       display: grid;
       place-items: center;
-      padding: 20px 0px;
+      padding: 40px 0px;
 
       .upperinfo {
         width: 90%;
@@ -69,10 +87,12 @@
           font-size: 2rem;
           padding: 0px;
           margin: 0px;
+          margin-bottom: 2vh;
         }
 
         p {
           color: gray;
+          font-size: 1rem;
         }
       }
 
@@ -88,25 +108,30 @@
           .username-div {
             position: relative;
             width: 100%;
-            min-width: 20rem;
+            // min-width: 20rem;
 
-            .usernameLabel {
+            .starimportant {
               display: flex;
               flex-direction: row;
-              align-items: center;
-              color: gray;
-              gap: 0.5rem;
-              padding: 0px;
-              margin: 0px;
-              height: 24px;
+              align-self: center;
+
+              .usernameLabel {
+                color: gray;
+                padding: 0px;
+                margin: 0px;
+                height: 24px;
+              }
               p {
                 color: red;
+                margin-left: 0.2rem;
               }
             }
 
             .input-wrapper {
               position: relative;
               width: 100%;
+              display: flex;
+              align-items: center;
 
               .userNameIcon {
                 position: absolute;
@@ -117,10 +142,11 @@
                 border: none;
                 cursor: pointer;
                 padding: 0;
-                color: #555;
+                color: #888888;
 
                 mat-icon {
                   font-size: 20px;
+                  line-height: 1;
                 }
               }
 
@@ -132,10 +158,12 @@
                 border-radius: 6px;
                 font-size: 16px;
                 box-sizing: border-box;
+                line-height: 44px;
 
                 &::placeholder {
                   color: #777;
                   font-size: 14px;
+                  line-height: 44px;
                 }
 
                 &:focus {
@@ -145,21 +173,29 @@
                 }
               }
             }
+            small {
+              .inputError {
+                color: red;
+              }
+            }
           }
 
           .password-div {
-            min-width: 20rem;
-            .passwordLabel {
+            // min-width: 20rem;
+            .starimportant {
               display: flex;
               flex-direction: row;
-              align-items: center;
-              color: gray;
-              gap: 0.5rem;
-              padding: 0px;
-              margin: 0px;
-              height: 24px;
+              align-self: center;
+
+              .usernameLabel {
+                color: gray;
+                padding: 0px;
+                margin: 0px;
+                height: 24px;
+              }
               p {
                 color: red;
+                margin-left: 0.2rem;
               }
             }
 
@@ -178,7 +214,7 @@
                 border: none;
                 cursor: pointer;
                 padding: 0;
-                color: #555;
+                color: #888888;
 
                 mat-icon {
                   font-size: 20px;
@@ -213,6 +249,11 @@
                 right: 8px;
               }
             }
+            small {
+              .inputError {
+                color: red;
+              }
+            }
           }
           .forgetPassword {
             width: max-content;
@@ -236,21 +277,88 @@
           .buttondiv {
             display: flex;
             justify-content: flex-start;
-
             width: 100%;
 
             .loginbutton {
               width: 100%;
-              height: 4vh;
+              height: 5vh;
               border-radius: 10px;
               border: none;
               background-color: #0a66c2;
               color: white;
-              font-size: 24px;
+              font-size: 3vh;
               font-weight: bold;
             }
           }
         }
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1191.98px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: scroll;
+
+    .imageSection {
+      margin-top: 50vh;
+      max-width: 38rem;
+    }
+
+    .formSection {
+      .formDiv {
+        min-width: 38rem;
+        max-width: 39rem;
+      }
+    }
+  }
+  @media (min-width: 500px) and (max-width: 767.98px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: scroll;
+
+    .imageSection {
+      display: none;
+    }
+
+    .formSection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .formDiv {
+        min-width: 30rem;
+        max-width: 37rem;
+      }
+    }
+  }
+
+  @media (min-width: 0px) and (max-width: 499px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: scroll;
+
+    .imageSection {
+      display: none;
+    }
+
+    .formSection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .formDiv {
+        min-width: 90svw;
+        max-width: 100svw;
       }
     }
   }

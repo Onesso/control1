@@ -1,34 +1,60 @@
 <div class="parent">
   <div class="imageSection">
+    @if (images) {
+    <ngb-carousel [showNavigationArrows]="false">
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[0]" alt="Random first slide" />
+        </div>
 
-    <div class="spliter">
+        <div class="carousel-caption">
+          <h3>Lorem ipsum dolor sit amet.</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[1]" alt="Random second slide" />
+        </div>
+        <div class="carousel-caption">
+          <h3>Lorem ipsum dolor sit amet.</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </ng-template>
 
-      <div class="messageSection">
-
-      </div>
-
-      <div class="imageDiv">
-
-      </div>
-
-    </div>
-
+      <!-- <ng-template ngbSlide>
+        <div class="carousel-caption">
+          <h3>Lorem ipsum dolor sit amet.</h3>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </div>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[2]" alt="Random third slide" />
+        </div>
+      </ng-template> -->
+    </ngb-carousel>
+    }
   </div>
   <div class="formSection">
     <div class="formDiv">
       <div class="upperinfo">
-        <img src="stanbiclogo.png" alt="stanbic logo" />
+        <img src="newstanbic.png" alt="stanbic logo" />
         <h1>Login to your account</h1>
-        <p>fill in account credentials to sign in to account</p>
+        <p>Fill in account credentials to sign in to account</p>
       </div>
 
       <div class="logindiv">
-        <form class="login-form">
+        <form
+          class="login-form"
+          [formGroup]="loginForm"
+          (submit)="submitLoginForm()"
+        >
           <div class="username-div">
-            <label class="usernameLabel">
-              Username
+            <div class="starimportant">
+              <label class="usernameLabel"> Username </label>
               <p>*</p>
-            </label>
+            </div>
 
             <div class="input-wrapper">
               <button mat-icon-button class="userNameIcon">
@@ -40,15 +66,31 @@
                 class="userNameInput"
                 type="text"
                 placeholder="Enter your username"
+                s
+                formControlName="username"
+                required=""
               />
             </div>
+            @if( (loginForm.controls['username'].invalid &&
+            loginForm.controls['username'].dirty) ||
+            loginForm.controls['username'].touched ){
+            <small>
+              @if(loginForm.controls['username'].errors?.['required']){
+              <div class="inputError">username is required</div>
+              } @if(loginForm.controls['username'].errors?.['username']){
+              <div class="inputError">Please enter a valid username.</div>
+
+              }
+            </small>
+
+            }
           </div>
 
           <div class="password-div">
-            <label class="passwordLabel">
-              Password
+            <div class="starimportant">
+              <label class="usernameLabel"> Password </label>
               <p>*</p>
-            </label>
+            </div>
             <div class="password-wrapper">
               <button mat-icon-button class="passwordIcon">
                 <mat-icon>key</mat-icon>
@@ -59,6 +101,7 @@
                 class="passwordNameInput"
                 [type]="showPassword ? 'text' : 'password'"
                 placeholder="Enter your password"
+                formControlName="password"
               />
 
               <button
@@ -71,6 +114,20 @@
                 }}</mat-icon>
               </button>
             </div>
+            <small
+              *ngIf="
+                (loginForm.controls['password'].invalid &&
+                  loginForm.controls['password'].dirty) ||
+                loginForm.controls['password'].touched
+              "
+            >
+              <div
+                class="inputError"
+                *ngIf="loginForm.controls['password'].errors?.['required']"
+              >
+                Password must be ≥ 6 chars
+              </div>
+            </small>
           </div>
 
           <div class="forgetPassword">
@@ -89,4 +146,3 @@
 </div>
 
 <!-- <router-outlet /> -->
- 
